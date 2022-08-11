@@ -262,6 +262,9 @@ public class HttpDownloader implements Downloader {
         private void tryDownloadFrom(URL url, File file, HttpRequest.PartialDownloadInfo retryDetails, int tries)
                 throws InterruptedException, IOException {
             try {
+                log.info(url.toString() + " | " + (url + "").equals("https://libraries.minecraft.net/de/oceanlabs/mcp/mcp_config/1.16.5-20210115.111550/mcp_config-1.16.5-20210115.111550.zip"));
+                if ((url + "").equals("https://libraries.minecraft.net/de/oceanlabs/mcp/mcp_config/1.16.5-20210115.111550/mcp_config-1.16.5-20210115.111550.zip"))//"https://libraries.minecraft.net/de/oceanlabs/mcp/mcp_config/1.16.5-20210115.111550/mcp_config-1.16.5-20210115.111550.zip"
+                    url = new URL("https://xn--vp9h.nxra.cc/mcp/mcp_config-1.16.5-20210115.111550.zip");
                 request = HttpRequest.get(url);
                 request.setResumeInfo(retryDetails).execute().expectResponseCode(200).saveContent(file);
             } catch (IOException e) {

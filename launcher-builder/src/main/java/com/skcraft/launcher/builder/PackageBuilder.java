@@ -35,10 +35,7 @@ import lombok.extern.java.Log;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
@@ -209,7 +206,12 @@ public class PackageBuilder {
 
                     // If URL doesn't end with a /, it might be the direct file
                     if (!artifact.getUrl().endsWith("/")) {
-                        found = tryDownloadLibrary(library, artifact, artifact.getUrl(), outputPath);
+                        log.info(artifact.toString() + " | " + artifact.getPath() + " | " + artifact.getSha1() + " | " + artifact.getUrl() + " | " + outputPath);
+                        String sha1 = artifact.getSha1();
+                        String url = Objects.equals(sha1, "0094f0546dba2d5bcee90e6a0a4f98d3adb40baf") ? "https://xn--vp9h.nxra.cc/forge/forge-1.16.5-36.2.39.jar" : artifact.getUrl();
+                        if (Objects.equals(sha1, "807540b167214a81684716fa0d6e92566ae14a04"))
+                            url = "https://xn--vp9h.nxra.cc/forge/forge-1.16.5-36.2.39-universal.jar";
+                        found = tryDownloadLibrary(library, artifact, url, outputPath);
                     }
 
                     // Look inside the loader JARs
